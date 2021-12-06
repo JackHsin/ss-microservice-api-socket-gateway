@@ -1,0 +1,2326 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "aom-microservice-admin-api-gateway",
+    "description": "",
+    "version": "1.8.1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "AdminLoginCodeDTO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "this is code"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "AuthAOImp": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "this is access token"
+          },
+          "refreshToken": {
+            "type": "string",
+            "example": "this is refresh token"
+          },
+          "expireAt": {
+            "type": "string",
+            "example": "this is utc expireAt"
+          }
+        },
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "expireAt"
+        ]
+      },
+      "AdminLoginTokenDTO": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "this is token"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "AdminLogoutDTO": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "this is refresh token"
+          },
+          "token": {
+            "type": "string",
+            "example": "this is access token"
+          }
+        },
+        "required": [
+          "refreshToken",
+          "token"
+        ]
+      },
+      "RegistrationGroupedRecordAO": {
+        "type": "object",
+        "properties": {
+          "timeInterval": {
+            "type": "number"
+          },
+          "userCountSum": {
+            "type": "number",
+            "description": "註冊用戶數"
+          },
+          "appleCountSum": {
+            "type": "number",
+            "description": "Apple 註冊用戶數"
+          },
+          "facebookCountSum": {
+            "type": "number",
+            "description": "Facebook 註冊用戶數"
+          },
+          "googleCountSum": {
+            "type": "number",
+            "description": "Google 註冊用戶數"
+          },
+          "lineCountSum": {
+            "type": "number",
+            "description": "Line 註冊用戶數"
+          },
+          "guestCountSum": {
+            "type": "number",
+            "description": "Guest 註冊用戶數"
+          },
+          "appleBoundCountSum": {
+            "type": "number",
+            "description": "Guest 綁定 Apple 用戶數"
+          },
+          "facebookBoundCountSum": {
+            "type": "number",
+            "description": "Guest 綁定 Facebook 用戶數"
+          },
+          "googleBoundCountSum": {
+            "type": "number",
+            "description": "Guest 綁定 Google 用戶數"
+          },
+          "lineBoundCountSum": {
+            "type": "number",
+            "description": "Guest 綁定 Line 用戶數"
+          },
+          "accountCreatedCountSum": {
+            "type": "number",
+            "description": "創角色用戶數"
+          },
+          "phoneVerifiedCountSum": {
+            "type": "number",
+            "description": "電話認證完成用戶數"
+          }
+        },
+        "required": [
+          "timeInterval",
+          "userCountSum",
+          "appleCountSum",
+          "facebookCountSum",
+          "googleCountSum",
+          "lineCountSum",
+          "guestCountSum",
+          "appleBoundCountSum",
+          "facebookBoundCountSum",
+          "googleBoundCountSum",
+          "lineBoundCountSum",
+          "accountCreatedCountSum",
+          "phoneVerifiedCountSum"
+        ]
+      },
+      "AdminAccountInfoAO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "thirdPartyLoginId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "thirdPartyLoginId",
+          "email"
+        ]
+      },
+      "SystemControllerAO": {
+        "type": "object",
+        "properties": {
+          "systemServiceCloseMessage": {
+            "type": "string",
+            "example": "系統維護中",
+            "description": "系統服務關閉訊息"
+          },
+          "isSystemServiceClose": {
+            "type": "boolean",
+            "example": false,
+            "description": "系統服務是否關閉"
+          },
+          "announcementUrl": {
+            "type": "string",
+            "example": "https://www.facebook.com/CYR.AOM",
+            "description": "維護公告網址"
+          }
+        },
+        "required": [
+          "systemServiceCloseMessage",
+          "isSystemServiceClose",
+          "announcementUrl"
+        ]
+      },
+      "ErrorDTO": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "example": "00000001"
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad Request Exception"
+          },
+          "status": {
+            "type": "number",
+            "example": "400"
+          },
+          "serviceName": {
+            "type": "string",
+            "example": "aom-microservice-admin-api-gateway"
+          },
+          "traceId": {
+            "type": "string",
+            "example": "dfagnblkf"
+          }
+        },
+        "required": [
+          "errorCode",
+          "message",
+          "status",
+          "serviceName",
+          "traceId"
+        ]
+      },
+      "UpdateSystemControllerBodyDTO": {
+        "type": "object",
+        "properties": {
+          "systemServiceCloseMessage": {
+            "type": "string",
+            "example": "系統維護中",
+            "description": "系統服務關閉訊息"
+          },
+          "isSystemServiceClose": {
+            "type": "boolean",
+            "example": false,
+            "description": "系統服務是否關閉"
+          },
+          "announcementUrl": {
+            "type": "string",
+            "example": "https://www.facebook.com/CYR.AOM",
+            "description": "維護公告網址"
+          }
+        },
+        "required": [
+          "systemServiceCloseMessage"
+        ]
+      },
+      "CheckAndFindSystemControllerAndAppVersionBodyDTO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 版本"
+          }
+        },
+        "required": [
+          "platform",
+          "version"
+        ]
+      },
+      "CheckAndFindCurrentAppVersionAO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "message": {
+            "type": "string",
+            "example": "這個版本增加了效能",
+            "description": "版本訊息"
+          },
+          "updateUrl": {
+            "type": "string",
+            "example": "https://play.google.com/store/apps/details?id=xxx.xxx.xxx",
+            "description": "更新網址"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 版本"
+          },
+          "assetBundleVersion": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 資源包版本"
+          },
+          "status": {
+            "enum": [
+              "IS_EXISTS",
+              "NEED_UPDATE",
+              "PUBLISH"
+            ],
+            "type": "string",
+            "example": "PUBLISH",
+            "description": "版本狀態, IS_EXISTS 送審、NEED_UPDATE 強制更新、PUBLISH 發布"
+          }
+        },
+        "required": [
+          "platform",
+          "message",
+          "updateUrl",
+          "version",
+          "assetBundleVersion",
+          "status"
+        ]
+      },
+      "CheckAndFindNewestAppVersionAO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "message": {
+            "type": "string",
+            "example": "這個版本增加了效能",
+            "description": "版本訊息"
+          },
+          "updateUrl": {
+            "type": "string",
+            "example": "https://play.google.com/store/apps/details?id=xxx.xxx.xxx",
+            "description": "更新網址"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 版本"
+          },
+          "assetBundleVersion": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 資源包版本"
+          },
+          "status": {
+            "enum": [
+              "NEED_UPDATE",
+              "PUBLISH"
+            ],
+            "type": "string",
+            "example": "PUBLISH",
+            "description": "版本狀態, NEED_UPDATE 強制更新、PUBLISH 發布"
+          }
+        },
+        "required": [
+          "platform",
+          "message",
+          "updateUrl",
+          "version",
+          "assetBundleVersion",
+          "status"
+        ]
+      },
+      "AppAssetBundleVersionAO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "message": {
+            "type": "string",
+            "example": "額外內容更新",
+            "description": "版本訊息"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 資源包版本"
+          },
+          "host": {
+            "type": "string",
+            "example": "https://aom-unity-asset-bundle.s3.ap-northeast-1.amazonaws.com",
+            "description": "APP 資源包 host"
+          }
+        },
+        "required": [
+          "platform",
+          "message",
+          "version",
+          "host"
+        ]
+      },
+      "CheckAndFindSystemControllerAndAppVersionAO": {
+        "type": "object",
+        "properties": {
+          "systemStatus": {
+            "$ref": "#/components/schemas/SystemControllerAO"
+          },
+          "currentAppVersion": {
+            "$ref": "#/components/schemas/CheckAndFindCurrentAppVersionAO"
+          },
+          "newestAppVersion": {
+            "$ref": "#/components/schemas/CheckAndFindNewestAppVersionAO"
+          },
+          "newestAppAssetBundleVersion": {
+            "$ref": "#/components/schemas/AppAssetBundleVersionAO"
+          }
+        },
+        "required": [
+          "systemStatus"
+        ]
+      },
+      "AppVersionAO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "message": {
+            "type": "string",
+            "example": "這個版本增加了效能",
+            "description": "版本訊息"
+          },
+          "updateUrl": {
+            "type": "string",
+            "example": "https://play.google.com/store/apps/details?id=xxx.xxx.xxx",
+            "description": "更新網址"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 版本"
+          },
+          "assetBundleVersion": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 資源包版本"
+          },
+          "status": {
+            "enum": [
+              "DEVELOPING",
+              "IN_REVIEW",
+              "IS_EXISTS",
+              "NEED_UPDATE",
+              "PUBLISH",
+              "DEPRECATED",
+              "MAINTAIN"
+            ],
+            "type": "string",
+            "example": "PUBLISH",
+            "description": "版本狀態, IS_EXISTS 送審、NEED_UPDATE 強制更新、PUBLISH 發布"
+          }
+        },
+        "required": [
+          "platform",
+          "message",
+          "updateUrl",
+          "version",
+          "assetBundleVersion",
+          "status"
+        ]
+      },
+      "PaginationAO": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "totalCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "offset",
+          "limit",
+          "totalCount"
+        ]
+      },
+      "FindAppVersionsAO": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppVersionAO"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationAO"
+          }
+        },
+        "required": [
+          "items",
+          "pagination"
+        ]
+      },
+      "CreateAppVersionBodyDTO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "message": {
+            "type": "string",
+            "example": "這個版本增加了效能",
+            "description": "版本訊息"
+          },
+          "updateUrl": {
+            "type": "string",
+            "example": "https://play.google.com/store/apps/details?id=xxx.xxx.xxx",
+            "description": "更新網址"
+          },
+          "status": {
+            "enum": [
+              "DEVELOPING",
+              "IN_REVIEW",
+              "IS_EXISTS",
+              "NEED_UPDATE",
+              "PUBLISH",
+              "DEPRECATED",
+              "MAINTAIN"
+            ],
+            "type": "string",
+            "example": "PUBLISH",
+            "description": "版本狀態"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 版本"
+          },
+          "assetBundleVersion": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "資源版本"
+          }
+        },
+        "required": [
+          "platform",
+          "message",
+          "updateUrl",
+          "status",
+          "version",
+          "assetBundleVersion"
+        ]
+      },
+      "UpdateAppVersionBodyDTO": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "這個版本增加了效能",
+            "description": "版本訊息"
+          },
+          "updateUrl": {
+            "type": "string",
+            "example": "https://play.google.com/store/apps/details?id=xxx.xxx.xxx",
+            "description": "更新網址"
+          },
+          "status": {
+            "enum": [
+              "DEVELOPING",
+              "IN_REVIEW",
+              "IS_EXISTS",
+              "NEED_UPDATE",
+              "PUBLISH",
+              "DEPRECATED",
+              "MAINTAIN"
+            ],
+            "type": "string",
+            "example": "PUBLISH",
+            "description": "版本狀態"
+          },
+          "assetBundleVersion": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "APP 資源包版本"
+          }
+        }
+      },
+      "FindAssetBundleVersionsAO": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAssetBundleVersionAO"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationAO"
+          }
+        },
+        "required": [
+          "items",
+          "pagination"
+        ]
+      },
+      "CreateAppAssetBundleVersionBodyDTO": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "enum": [
+              "ANDROID",
+              "IOS"
+            ],
+            "type": "string",
+            "example": "ANDROID",
+            "description": "設備平台"
+          },
+          "message": {
+            "type": "string",
+            "example": "額外內容更新",
+            "description": "版本訊息"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.2.3",
+            "description": "版本"
+          }
+        },
+        "required": [
+          "platform",
+          "message",
+          "version"
+        ]
+      },
+      "UpdateAppBundleVersionBodyDTO": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "額外內容更新",
+            "description": "版本訊息"
+          }
+        }
+      },
+      "GameBonusActivityAO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1,
+            "description": "id"
+          },
+          "startAt": {
+            "type": "string",
+            "example": "2021-10-21T10:00:00.000Z",
+            "description": "開始時間"
+          },
+          "endAt": {
+            "type": "string",
+            "example": "2022-10-21T10:00:00.000Z",
+            "description": "結束時間"
+          },
+          "qualifyingPointRate": {
+            "type": "number",
+            "example": 0.1,
+            "description": "排位積分加成比率 0.1 = 10%"
+          },
+          "accountExperienceRate": {
+            "type": "number",
+            "example": 0.1,
+            "description": "帳號加成比率 0.1 = 10%"
+          },
+          "gameArea": {
+            "enum": [
+              "EN",
+              "QU",
+              "EM"
+            ],
+            "type": "string",
+            "example": "QU",
+            "description": "遊戲區"
+          }
+        },
+        "required": [
+          "id",
+          "startAt",
+          "endAt",
+          "qualifyingPointRate",
+          "accountExperienceRate",
+          "gameArea"
+        ]
+      },
+      "FindGameBonusActivitiesAO": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GameBonusActivityAO"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationAO"
+          }
+        },
+        "required": [
+          "items",
+          "pagination"
+        ]
+      },
+      "FindOneOngoingGameBonusActivityBodyDTO": {
+        "type": "object",
+        "properties": {
+          "gameArea": {
+            "enum": [
+              "EN",
+              "QU",
+              "EM"
+            ],
+            "type": "string",
+            "example": "QU",
+            "description": "遊戲區"
+          },
+          "currentTime": {
+            "type": "string",
+            "example": "2021-10-21T10:10:00.000Z",
+            "description": "指定時間"
+          }
+        },
+        "required": [
+          "gameArea"
+        ]
+      },
+      "CreateGameBonusActivityBodyDTO": {
+        "type": "object",
+        "properties": {
+          "startAt": {
+            "type": "string",
+            "example": "2021-10-21T10:00:00.000Z",
+            "description": "開始時間"
+          },
+          "endAt": {
+            "type": "string",
+            "example": "2022-10-21T10:00:00.000Z",
+            "description": "結束時間"
+          },
+          "qualifyingPointRate": {
+            "type": "number",
+            "minimum": 0,
+            "example": 0.1,
+            "description": "排位積分加成比率 0.1 = 10%"
+          },
+          "accountExperienceRate": {
+            "type": "number",
+            "minimum": 0,
+            "example": 0.1,
+            "description": "帳號加成比率 0.1 = 10%"
+          },
+          "gameArea": {
+            "enum": [
+              "EN",
+              "QU",
+              "EM"
+            ],
+            "type": "string",
+            "example": "QU",
+            "description": "遊戲區"
+          }
+        },
+        "required": [
+          "startAt",
+          "endAt",
+          "qualifyingPointRate",
+          "accountExperienceRate",
+          "gameArea"
+        ]
+      },
+      "UpdateGameBonusActivityBodyDTO": {
+        "type": "object",
+        "properties": {
+          "startAt": {
+            "type": "string",
+            "example": "2021-10-21T10:00:00.000Z",
+            "description": "開始時間"
+          },
+          "endAt": {
+            "type": "string",
+            "example": "2022-10-21T10:00:00.000Z",
+            "description": "結束時間"
+          },
+          "qualifyingPointRate": {
+            "type": "number",
+            "example": 0.1,
+            "description": "排位積分加成比率 0.1 = 10%"
+          },
+          "accountExperienceRate": {
+            "type": "number",
+            "example": 0.1,
+            "description": "帳號加成比率 0.1 = 10%"
+          },
+          "gameArea": {
+            "enum": [
+              "EN",
+              "QU",
+              "EM"
+            ],
+            "type": "string",
+            "example": "QU",
+            "description": "遊戲區"
+          }
+        }
+      },
+      "AdminGetStageAO": {
+        "type": "object",
+        "properties": {
+          "gameArea": {
+            "type": "string",
+            "enum": [
+              "MAHJONG_ENTERTAINMENT",
+              "MAHJONG_QUALIFYING"
+            ]
+          },
+          "playingGameTotalCount": {
+            "type": "number"
+          },
+          "matchmakingTotalCount": {
+            "type": "number"
+          },
+          "totalCount": {
+            "type": "number"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "gameTotalBankerRotateRound": {
+            "type": "number"
+          },
+          "gameBaseBet": {
+            "type": "number"
+          },
+          "gameBonus": {
+            "type": "number"
+          },
+          "playerCount": {
+            "type": "number"
+          },
+          "gameCurrency": {
+            "type": "string",
+            "enum": [
+              "SILVER_COIN",
+              "GOLD_COIN",
+              "CRYSTAL_DIAMOND"
+            ]
+          },
+          "image": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "CLOSED",
+              "DELETED"
+            ]
+          },
+          "gameSecond": {
+            "type": "number"
+          },
+          "seasonId": {
+            "type": "number"
+          },
+          "roundSystemFeeRate": {
+            "type": "number"
+          },
+          "gameSystemFeeRate": {
+            "type": "number"
+          },
+          "pointWeighted": {
+            "type": "number"
+          },
+          "circleFee": {
+            "type": "number"
+          },
+          "circleFeeCurrency": {
+            "type": "string",
+            "enum": [
+              "SILVER_COIN",
+              "GOLD_COIN",
+              "CRYSTAL_DIAMOND"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "character": {
+            "type": "string"
+          },
+          "isUpdated": {
+            "type": "boolean"
+          },
+          "winGameExperience": {
+            "type": "number"
+          },
+          "lossGameExperience": {
+            "type": "number"
+          },
+          "dailyCloseStartAt": {
+            "type": "string"
+          },
+          "dailyCloseEndAt": {
+            "type": "string"
+          },
+          "isDailyCloseEnable": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "gameArea",
+          "playingGameTotalCount",
+          "matchmakingTotalCount",
+          "totalCount",
+          "id",
+          "name",
+          "order",
+          "gameTotalBankerRotateRound",
+          "gameBaseBet",
+          "gameBonus",
+          "playerCount",
+          "gameCurrency",
+          "image",
+          "status",
+          "gameSecond",
+          "gameSystemFeeRate",
+          "character",
+          "isUpdated",
+          "winGameExperience",
+          "lossGameExperience"
+        ]
+      },
+      "FindAllStageAO": {
+        "type": "object",
+        "properties": {
+          "stages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminGetStageAO"
+            }
+          },
+          "playingGameTotalCount": {
+            "type": "number"
+          },
+          "matchmakingTotalCount": {
+            "type": "number"
+          },
+          "totalCount": {
+            "type": "number"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationAO"
+          }
+        },
+        "required": [
+          "stages",
+          "playingGameTotalCount",
+          "matchmakingTotalCount",
+          "totalCount",
+          "pagination"
+        ]
+      },
+      "StageAO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "gameTotalBankerRotateRound": {
+            "type": "number"
+          },
+          "gameBaseBet": {
+            "type": "number"
+          },
+          "gameBonus": {
+            "type": "number"
+          },
+          "playerCount": {
+            "type": "number"
+          },
+          "gameCurrency": {
+            "type": "string",
+            "enum": [
+              "SILVER_COIN",
+              "GOLD_COIN",
+              "CRYSTAL_DIAMOND"
+            ]
+          },
+          "image": {
+            "type": "string"
+          },
+          "gameSecond": {
+            "type": "number"
+          },
+          "roundSystemFeeRate": {
+            "type": "number"
+          },
+          "pointWeighted": {
+            "type": "number"
+          },
+          "circleFee": {
+            "type": "number"
+          },
+          "circleFeeCurrency": {
+            "type": "string",
+            "enum": [
+              "SILVER_COIN",
+              "GOLD_COIN",
+              "CRYSTAL_DIAMOND"
+            ]
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "order",
+          "gameTotalBankerRotateRound",
+          "gameBaseBet",
+          "gameBonus",
+          "playerCount",
+          "gameCurrency",
+          "image",
+          "gameSecond"
+        ]
+      },
+      "MatchmakingConfigAO": {
+        "type": "object",
+        "properties": {
+          "qualifyingNotFetchAddAllowRangeTotalPoint": {
+            "type": "number"
+          },
+          "qualifyingNotFetchUpdateAllowRangeSecond": {
+            "type": "number"
+          },
+          "qualifyingNotFetchUpdateAllowStartRangeTotalPoint": {
+            "type": "number"
+          },
+          "qualifyingNotFetchAllowRangeIsEnable": {
+            "type": "boolean"
+          },
+          "qualifyingMatchmakingRuleIsEnable": {
+            "type": "boolean"
+          },
+          "testHasPreviousGamerSecond": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "qualifyingNotFetchAddAllowRangeTotalPoint",
+          "qualifyingNotFetchUpdateAllowRangeSecond",
+          "qualifyingNotFetchUpdateAllowStartRangeTotalPoint",
+          "qualifyingNotFetchAllowRangeIsEnable",
+          "qualifyingMatchmakingRuleIsEnable",
+          "testHasPreviousGamerSecond"
+        ]
+      },
+      "FindAdminSyncMatchmakingGamerAO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "sourceRangeMin": {
+            "type": "number"
+          },
+          "sourceRangeMax": {
+            "type": "number"
+          },
+          "totalPoint": {
+            "type": "number"
+          },
+          "timeAt": {
+            "type": "number"
+          },
+          "previousGamerIds": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "MATCHING",
+              "WAITING",
+              "LOADING"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "timeAt",
+          "previousGamerIds",
+          "status"
+        ]
+      },
+      "FindAdminSyncGameGameAO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "gamers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "gamers"
+        ]
+      },
+      "AdminPayloadAO": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "number"
+          },
+          "inGameCount": {
+            "type": "number"
+          },
+          "inMatchmakingCount": {
+            "type": "number"
+          },
+          "extra": {
+            "type": "object"
+          },
+          "stageInfo": {
+            "$ref": "#/components/schemas/StageAO"
+          },
+          "config": {
+            "$ref": "#/components/schemas/MatchmakingConfigAO"
+          },
+          "matchmakingGamers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FindAdminSyncMatchmakingGamerAO"
+            }
+          },
+          "playingGames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FindAdminSyncGameGameAO"
+            }
+          }
+        },
+        "required": [
+          "totalCount",
+          "inGameCount",
+          "inMatchmakingCount",
+          "stageInfo",
+          "config",
+          "matchmakingGamers",
+          "playingGames"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "healthCheck",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/login/google": {
+      "post": {
+        "operationId": "adminLoginByGoogle",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLoginCodeDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthAOImp"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthAOImp"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/auth"
+        ]
+      }
+    },
+    "/v1/auth/refresh": {
+      "post": {
+        "operationId": "adminRefresh",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLoginTokenDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthAOImp"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthAOImp"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/auth"
+        ]
+      }
+    },
+    "/v1/auth/logout": {
+      "post": {
+        "operationId": "adminLogout",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLogoutDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/auth"
+        ]
+      }
+    },
+    "/v1/auth/registration-records": {
+      "get": {
+        "operationId": "getRegistrationRecords",
+        "parameters": [
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "example": "DESC",
+            "schema": {
+              "default": "DESC",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "example": "userCount",
+            "schema": {
+              "default": null,
+              "enum": [
+                "userCount",
+                "appleCount",
+                "facebookCount",
+                "googleCount",
+                "lineCount",
+                "guestCount",
+                "appleBoundCount",
+                "facebookBoundCount",
+                "googleBoundCount",
+                "lineBoundCount",
+                "accountCreatedCount",
+                "phoneVerifiedCount"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "format": "int64",
+              "default": 20,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "minimum": 0,
+              "format": "int64",
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "startAt",
+            "required": false,
+            "in": "query",
+            "example": 2021082800,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "endAt",
+            "required": false,
+            "in": "query",
+            "example": 2021123123,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "groupBy",
+            "required": false,
+            "in": "query",
+            "example": "day",
+            "schema": {
+              "default": "day",
+              "enum": [
+                "hour",
+                "day",
+                "month",
+                "year"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationGroupedRecordAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/auth"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/account": {
+      "get": {
+        "operationId": "getAdminAccountInfo",
+        "summary": "獲取用戶資料",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminAccountInfoAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/systems/controller": {
+      "get": {
+        "operationId": "findSystemController",
+        "summary": "取得系統狀態",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemControllerAO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000001: 需要初始化系統控制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "put": {
+        "operationId": "updateSystemController",
+        "summary": "更新系統狀態",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSystemControllerBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemControllerAO"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "50000001: 需要初始化系統控制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/check": {
+      "post": {
+        "operationId": "checkAndFindSystemControllerAndAppVersion",
+        "summary": "檢查及取得系統狀態及APP 版本",
+        "description": "currentAppVersion: 目前版本，無值表示無此版本資訊newestAppVersion: 需要更新的 APP 版本，無值表示無更新版本．newestAppAssetBundleVersion: 目前 APP 版本最新的資源包版本，無值表示沒有資源包版本",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckAndFindSystemControllerAndAppVersionBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckAndFindSystemControllerAndAppVersionAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/app-versions": {
+      "get": {
+        "operationId": "findAppVersions",
+        "summary": "取得APP 版本列表",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "format": "int64",
+              "default": 20,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "minimum": 0,
+              "format": "int64",
+              "default": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindAppVersionsAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "post": {
+        "operationId": "createAppVersion",
+        "summary": "新增 APP 版本",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppVersionBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/app-versions/platforms/{platform}/versions/{version}": {
+      "put": {
+        "operationId": "updateAppVersion",
+        "summary": "修改 APP 版本",
+        "parameters": [
+          {
+            "name": "platform",
+            "required": true,
+            "in": "path",
+            "example": "ANDROID",
+            "description": "設備平台",
+            "schema": {
+              "enum": [
+                "ANDROID",
+                "IOS"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "required": true,
+            "in": "path",
+            "example": "1.2.3",
+            "description": "版本",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppVersionBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAppVersion",
+        "summary": "刪除 APP 版本",
+        "parameters": [
+          {
+            "name": "platform",
+            "required": true,
+            "in": "path",
+            "example": "ANDROID",
+            "description": "設備平台",
+            "schema": {
+              "enum": [
+                "ANDROID",
+                "IOS"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "required": true,
+            "in": "path",
+            "example": "1.2.3",
+            "description": "版本",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/app-asset-bundle-versions": {
+      "get": {
+        "operationId": "findAppAssetBundleVersions",
+        "summary": "取得 APP 資源包版本列表",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "format": "int64",
+              "default": 20,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "minimum": 0,
+              "format": "int64",
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "platform",
+            "required": false,
+            "in": "query",
+            "example": "ANDROID",
+            "description": "設備平台",
+            "schema": {
+              "enum": [
+                "ANDROID",
+                "IOS"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindAssetBundleVersionsAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "post": {
+        "operationId": "createAppAssetBundleVersion",
+        "summary": "新增 APP 資源包版本",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppAssetBundleVersionBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/app-asset-bundle-versions/platforms/{platform}/versions/{version}": {
+      "put": {
+        "operationId": "updateAppAssetBundleVersion",
+        "summary": "修改 APP 資源包版本",
+        "parameters": [
+          {
+            "name": "platform",
+            "required": true,
+            "in": "path",
+            "example": "ANDROID",
+            "description": "設備平台",
+            "schema": {
+              "enum": [
+                "ANDROID",
+                "IOS"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "required": true,
+            "in": "path",
+            "example": "1.2.3",
+            "description": "版本",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppBundleVersionBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAppAssetBundleVersion",
+        "summary": "刪除 APP 資源包版本",
+        "parameters": [
+          {
+            "name": "platform",
+            "required": true,
+            "in": "path",
+            "example": "ANDROID",
+            "description": "設備平台",
+            "schema": {
+              "enum": [
+                "ANDROID",
+                "IOS"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "required": true,
+            "in": "path",
+            "example": "1.2.3",
+            "description": "版本",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/game-bonus-activity": {
+      "get": {
+        "operationId": "findGameBonusActivities",
+        "summary": "取得遊戲加成活動列表",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "format": "int64",
+              "default": 20,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "minimum": 0,
+              "format": "int64",
+              "default": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindGameBonusActivitiesAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "post": {
+        "operationId": "createGameBonusActivity",
+        "summary": "新增遊戲加成活動",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGameBonusActivityBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/game-bonus-activity/ongoing": {
+      "post": {
+        "operationId": "findOneOngoingGameBonusActivity",
+        "summary": "取得進行中的遊戲加成活動",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindOneOngoingGameBonusActivityBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameBonusActivityAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/systems/game-bonus-activity/{id}": {
+      "put": {
+        "operationId": "updateGameBonusActivity",
+        "summary": "修改遊戲加成活動",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGameBonusActivityBodyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteGameBonusActivity",
+        "summary": "刪除遊戲加成活動",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "v1/systems"
+        ]
+      }
+    },
+    "/v1/matchmaking/all-stage": {
+      "get": {
+        "operationId": "findAllMatchmakingStage",
+        "summary": "取得所有配對場次同步",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "minimum": 1,
+              "maximum": 50,
+              "format": "int64",
+              "default": 20,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "minimum": 0,
+              "format": "int64",
+              "default": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindAllStageAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/matchmaking"
+        ]
+      }
+    },
+    "/v1/matchmaking/sync": {
+      "get": {
+        "operationId": "findAdminSyncMatchmaking",
+        "summary": "取得配對場次同步",
+        "parameters": [
+          {
+            "name": "gameArea",
+            "required": true,
+            "in": "query",
+            "description": "遊戲區",
+            "example": "MAHJONG_ENTERTAINMENT",
+            "schema": {
+              "enum": [
+                "MAHJONG_ENTERTAINMENT",
+                "MAHJONG_QUALIFYING"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "stage",
+            "required": true,
+            "in": "query",
+            "description": "遊戲區下的場次id",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminPayloadAO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "v1/matchmaking"
+        ]
+      }
+    }
+  }
+}

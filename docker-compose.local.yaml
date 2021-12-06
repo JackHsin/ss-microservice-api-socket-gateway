@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  app:
+    profiles: ["docker-workflow"]
+    container_name: ${AOM_SERVICE_NAME}
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    working_dir: /app
+    entrypoint: /bin/sh
+    build:
+      context: ./docker/local
+      args:
+        - NODEJS_VERSION=${AOM_SERVICE_NODEJS_VERSION}
+    volumes:
+      - ./:/app
+    ports:
+      - ${AOM_SERVICE_API_PORT}:${AOM_SERVICE_API_PORT}
+      # debug mode https://blog.risingstack.com/how-to-debug-a-node-js-app-in-a-docker-container/
+      - 9229:9229
+    networks:
+      - aom-shared
+
+networks:
+  aom-shared:
+    name: aom-shared

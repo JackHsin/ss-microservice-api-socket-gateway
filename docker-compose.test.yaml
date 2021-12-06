@@ -1,0 +1,49 @@
+# docker-compose -f docker-compose.test.yaml up --abort-on-container-exit
+version: "3.8"
+services:
+  nats-streaming:
+    env_file:
+      - .env
+    image: nats-streaming:0.20-alpine
+    container_name: aom-nats-streaming-testing-for-${AOM_SERVICE_NAME}
+    command:
+      - "-mc"
+      - "0"
+      - "-msu"
+      - "0"
+      - "-ma"
+      - "96h"
+      - "-m"
+      - "8222"
+      - "-cid"
+      - "${AOM_NATS_STREAMING_CLUSTER_ID}"
+    networks:
+      - aom-testing
+
+  app:
+    container_name: ${AOM_SERVICE_NAME}-testing
+    tty: true
+    env_file:
+      - .env
+    working_dir: /app
+    build:
+      context: ./docker/local
+      args:
+        - NODEJS_VERSION=${AOM_SERVICE_NODEJS_VERSION}
+    volumes:
+      - ./:/app
+    depends_on:
+      - nats-streaming
+    command:
+      - "npm"
+      - "run"
+      - "test:e2e"
+      - "--"
+      - "--detectOpenHandles"
+      - "--forceExit"
+    networks:
+      - aom-testing
+
+networks:
+  aom-testing:
+    name: aom-testing

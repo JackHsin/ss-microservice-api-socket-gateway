@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aom-microservice-admin-api-gateway-config
+data:
+  .env: |
+    NODE_ENV=dev
+    AOM_SERVICE_NODEJS_VERSION=14
+    AOM_SERVICE_NAME=aom-microservice-admin-api-gateway
+    AOM_SERVICE_API_HOST=aom-microservice-admin-api-gateway-svc
+    AOM_SERVICE_API_PORT=3000
+    AOM_JWT_ADMIN_PUBLIC_KEY_PATH=secrets/aom-mahjong-admin.key.pub
+    AOM_NATS_STREAMING_CLUSTER_ID=aom-stan
+    AOM_NATS_STREAMING_HOST=aom-nats
+    AOM_NATS_STREAMING_PORT=4222
+    AOM_ADMIN_NATS_HOST=aom-nats
+    AOM_ADMIN_NATS_PORT=4222
+    AOM_AUTH_SERVICE_API_HOST=aom-microservice-auth-svc
+    AOM_AUTH_SERVICE_API_PORT=3000
+    AOM_ACCOUNT_SERVICE_API_HOST=aom-microservice-account-svc
+    AOM_ACCOUNT_SERVICE_API_PORT=3000
+    AOM_MAIL_SERVICE_API_HOST=aom-microservice-mail-svc
+    AOM_MAIL_SERVICE_API_PORT=3000
+    AOM_MATCHMAKING_SERVICE_API_HOST=aom-microservice-matchmaking-svc
+    AOM_MATCHMAKING_SERVICE_API_PORT=3000

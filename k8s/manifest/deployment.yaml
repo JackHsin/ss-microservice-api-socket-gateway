@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aom-microservice-admin-api-gateway
+spec:
+  selector:
+    matchLabels:
+      app: aom-microservice-admin-api-gateway
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: aom-microservice-admin-api-gateway
+    spec:
+      imagePullSecrets:
+        - name: ecr-registry-secret
+      containers:
+        - name: aom-microservice-admin-api-gateway
+          image: 596687818755.dkr.ecr.ap-northeast-1.amazonaws.com/aom-microservice-admin-api-gateway:1.8.1
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+          volumeMounts:
+            - name: aom-microservice-admin-api-gateway-config
+              readOnly: true
+              mountPath: "/app/.env"
+              subPath: ".env"
+            - name: aom-microservice-admin-api-gateway-jwt-secret
+              readOnly: true
+              mountPath: "/app/secrets"
+        # only for development
+#        - name: prism
+#          image: stoplight/prism:4
+#          imagePullPolicy: Always
+#          args:
+#            - mock
+#            - -h
+#            - "0.0.0.0"
+#            - http://localhost:3000/api-json
+
+      volumes:
+        - name: aom-microservice-admin-api-gateway-config
+          configMap:
+            name: aom-microservice-admin-api-gateway-config
+        - name: aom-microservice-admin-api-gateway-jwt-secret
+          secret:
+            secretName: aom-microservice-admin-api-gateway-jwt-secret                            
